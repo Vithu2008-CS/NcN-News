@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id               String   @id @default(cuid())
+  originalTitle    String
+  originalUrl      String   @unique
+  sourceId         String
+  title            String   // AI Generated
+  slug             String   @unique
+  summary          String?  // AI Generated short summary
+  content          String   // AI Generated full content
+  keyPoints        String[] // AI Generated array of points
+  seoDescription   String?
+  seoTags          String[]
+  imageUrl         String?
+  status           Status   @default(DRAFT)
+  publishedAt      DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  category         Category @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  source           Source   @relation(fields: [sourceId], references: [id])
+}
+
+model Source {
+  id              String   @id @default(cuid())
+  name            String
+  url             String
+  type            SourceType
+  reliability     Int      @default(5)
+  isActive        Boolean  @default(true)
+  articles        Article[]
+  lastFetchedAt   DateTime?
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  articles    Article[]
+}
+
+model Setting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+}
+
+enum Status {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+  REJECTED
+}
+
+enum SourceType {
+  RSS
+  TWITTER
+  YOUTUBE
+  FACEBOOK
+  OTHER
+}
