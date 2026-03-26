@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -40,11 +41,11 @@ export default function RootLayout({
               </div>
               
               <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="/" className="hover:text-blue-600 transition-colors">Home</a>
-                <a href="/tech" className="hover:text-blue-600 transition-colors">Technology</a>
-                <a href="/finance" className="hover:text-blue-600 transition-colors">Finance</a>
-                <a href="/business" className="hover:text-blue-600 transition-colors">Business</a>
-                <a href="/ai" className="hover:text-blue-600 transition-colors text-indigo-500 font-semibold underline decoration-2 underline-offset-4">AI Focus</a>
+                <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
+                <Link href="/tech" className="hover:text-blue-600 transition-colors">Technology</Link>
+                <Link href="/finance" className="hover:text-blue-600 transition-colors">Finance</Link>
+                <Link href="/business" className="hover:text-blue-600 transition-colors">Business</Link>
+                <Link href="/ai" className="hover:text-blue-600 transition-colors text-indigo-500 font-semibold underline decoration-2 underline-offset-4">AI Focus</Link>
               </div>
 
               <div className="flex items-center gap-4">
@@ -74,19 +75,19 @@ export default function RootLayout({
               <div>
                 <h4 className="font-semibold mb-4">Categories</h4>
                 <ul className="space-y-2 text-sm text-slate-500">
-                  <li><a href="#" className="hover:text-blue-600">Technology</a></li>
-                  <li><a href="#" className="hover:text-blue-600">Finance</a></li>
-                  <li><a href="#" className="hover:text-blue-600">Health</a></li>
-                  <li><a href="#" className="hover:text-blue-600">AI Trends</a></li>
+                  <li><Link href="#" className="hover:text-blue-600">Technology</Link></li>
+                  <li><Link href="#" className="hover:text-blue-600">Finance</Link></li>
+                  <li><Link href="#" className="hover:text-blue-600">Health</Link></li>
+                  <li><Link href="#" className="hover:text-blue-600">AI Trends</Link></li>
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold mb-4">Legal</h4>
                 <ul className="space-y-2 text-sm text-slate-500">
-                  <li><a href="#" className="hover:text-blue-600">Privacy Policy</a></li>
-                  <li><a href="#" className="hover:text-blue-600">Terms of Service</a></li>
-                  <li><a href="#" className="hover:text-blue-600">Cookie Policy</a></li>
-                  <li><a href="#" className="hover:text-blue-600">Ad Disclosure</a></li>
+                  <li><Link href="#" className="hover:text-blue-600">Privacy Policy</Link></li>
+                  <li><Link href="#" className="hover:text-blue-600">Terms of Service</Link></li>
+                  <li><Link href="#" className="hover:text-blue-600">Cookie Policy</Link></li>
+                  <li><Link href="#" className="hover:text-blue-600">Ad Disclosure</Link></li>
                 </ul>
               </div>
             </div>

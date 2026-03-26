@@ -1,8 +1,10 @@
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import AdSlot from "@/components/ads/AdSlot";
 
 interface ArticlePageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 // Logic to inject ads into content
@@ -33,7 +35,9 @@ const renderContentWithAds = (content: string) => {
   );
 };
 
-export default function ArticlePage({ params }: ArticlePageProps) {
+export default async function ArticlePage({ params }: ArticlePageProps) {
+  const { slug } = await params;
+  console.log('Viewing article:', slug);
   // Demo data - in production this would fetch from DB
   const article = {
     title: "The Future of AI: How LLMs are Redefining Professional Expertise",
@@ -54,7 +58,7 @@ export default function ArticlePage({ params }: ArticlePageProps) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">
-        <a href="/" className="hover:text-blue-600">Home</a>
+        <Link href="/" className="hover:text-blue-600">Home</Link>
         <span>/</span>
         <span className="text-blue-600">{article.category}</span>
       </nav>
@@ -82,8 +86,14 @@ export default function ArticlePage({ params }: ArticlePageProps) {
         </div>
       </header>
 
-      <div className="aspect-[21/9] rounded-3xl overflow-hidden mb-12 shadow-2xl">
-         <img src={article.imageUrl} alt={article.title} className="w-full h-full object-cover" />
+      <div className="relative aspect-[21/9] rounded-3xl overflow-hidden mb-12 shadow-2xl">
+         <Image 
+           src={article.imageUrl} 
+           alt={article.title} 
+           fill 
+           priority
+           className="object-cover" 
+         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -95,7 +105,7 @@ export default function ArticlePage({ params }: ArticlePageProps) {
                 AI Quick Summary
               </h3>
               <p className="text-slate-800 dark:text-slate-200 font-medium leading-relaxed italic">
-                "{article.summary}"
+                &quot;{article.summary}&quot;
               </p>
            </div>
 
@@ -141,8 +151,13 @@ export default function ArticlePage({ params }: ArticlePageProps) {
               <div className="space-y-8">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="group cursor-pointer">
-                    <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-3">
-                       <img src={`https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=300&i=${i}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3">
+                       <Image 
+                         src={`https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=300&i=${i}`} 
+                         alt="Related story"
+                         fill
+                         className="object-cover group-hover:scale-110 transition-transform duration-500" 
+                       />
                     </div>
                     <h5 className="font-bold text-sm leading-snug group-hover:text-blue-600 transition-colors">
                       How decentralized finance is disrupting traditional banking models in late 2024.

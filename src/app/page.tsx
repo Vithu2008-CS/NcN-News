@@ -1,3 +1,4 @@
+import Image from "next/image";
 import NewsCard from "@/components/NewsCard";
 import AdSlot from "@/components/ads/AdSlot";
 
@@ -66,10 +67,12 @@ export default function Home() {
           <section>
             <div className="group relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all hover:shadow-2xl hover:shadow-indigo-500/10 active:scale-[0.99]">
               <div className="relative aspect-[21/9] w-full">
-                <img 
+                <Image 
                   src={featuredArticle.imageUrl} 
                   alt={featuredArticle.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  priority
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent"></div>
               </div>

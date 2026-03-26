@@ -21,10 +21,11 @@ const NewsCard = ({ article, compact = false }: NewsCardProps) => {
     <article className={`premium-card h-full flex flex-col ${compact ? 'md:flex-row gap-4' : ''}`}>
       <div className={`relative ${compact ? 'w-full md:w-32 h-40 md:h-auto' : 'w-full aspect-video'}`}>
         {article.imageUrl ? (
-          <img 
+          <Image 
             src={article.imageUrl} 
             alt={article.title}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         ) : (
           <div className="w-full h-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400 italic">
